@@ -9,41 +9,68 @@ import { useContext, useEffect } from "react";
 
 import { Translation } from "./services/Translation";
 import { Route, Routes } from "react-router-dom";
-import { EnterPage } from "./components/enterpage/EnterPage";
+import { SelectionLanguage } from "./components/selectionLanguage/SelectionLanguage";
 import useLocalStorage from "react-use-localstorage";
+import { selectionClass } from "./services/classApi";
+import { UiContext } from "./Uicontext/UiContext";
 
 function App() {
-  const [language, setLanguage] = useImmer("english");
-  const [conent, setConent] = useImmer({
+  const [trasnlatedConent, setTrasnlatedConent] = useImmer({
+    setLanguage: {
+      title: "Language selection",
+    },
     login: {
       title: "Language selection",
     },
   });
-  const [username, setUsername] = useLocalStorage("cached-language", "");
-  const [dynamicClasses, SetDynamicClasses] = useImmer({});
+  const [cachedLanguage, setCachedLanguage] = useLocalStorage(
+    "cached-language",
+    ""
+  );
+  const [language, setLanguage] = useImmer(cachedLanguage || "english");
+  const [dynamicClasses, SetDynamicClasses] = useImmer({
+    ms_1: "magin-left1",
+    ms_2: "magin-left2",
+    ms_3: "magin-left3",
+    ms_4: "magin-left4",
+    ms_5: "magin-left5",
+  });
 
   useEffect(() => {
     const handleChangeDirection = () => {
       if (language === "persion") {
         document.dir = "rtl";
-        setConent(Translation.persion);
+        setTrasnlatedConent(Translation.persion);
+        SetDynamicClasses(selectionClass(language));
       } else {
+        SetDynamicClasses(selectionClass(language));
         document.dir = "ltl";
-        setConent(Translation.english);
+        setTrasnlatedConent(Translation.english);
       }
     };
     handleChangeDirection();
   }, [language]);
+
   return (
     <>
       <CacheProvider value={cacheRTL}>
         <ThemeProvider theme={language === "persion" ? RtlTheme : LtrTheme}>
-          <Routes>
-            <Route
-              path="/"
-              element={!username ? <EnterPage /> : <h1>slm</h1>}
-            />
-          </Routes>
+          <UiContext.Provider
+            value={{
+              dynamicClasses,
+              trasnlatedConent,
+              language,
+              setLanguage,
+              setCachedLanguage,
+            }}
+          >
+            <Routes>
+              <Route
+                path="/"
+                element={!cachedLanguage ? <SelectionLanguage /> : <h1>slm</h1>}
+              />
+            </Routes>
+          </UiContext.Provider>
         </ThemeProvider>
       </CacheProvider>
     </>

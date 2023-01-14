@@ -1,4 +1,10 @@
-import { Box, createTheme, styled, ThemeProvider } from "@mui/material";
+import {
+  Box,
+  createTheme,
+  responsiveFontSizes,
+  styled,
+  ThemeProvider,
+} from "@mui/material";
 import rtlPlugin from "stylis-plugin-rtl";
 
 import createCache from "@emotion/cache";
@@ -17,23 +23,37 @@ export const cacheRTL = createCache({
   stylisPlugins: [prefixer, rtlPlugin],
 });
 
-export const RtlTheme = createTheme({
-  direction: "rtl",
-});
-export const LtrTheme = createTheme({
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: "#010101",
+export const RtlTheme = responsiveFontSizes(
+  createTheme({
+    direction: "rtl",
+    typography: {
+      fontFamily: ["IRANSens_v2"],
+    },
+    palette: {
+      primary: {
+        main: "#FFA100",
+      },
+    },
+  })
+);
+export const LtrTheme = responsiveFontSizes(
+  createTheme({
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            color: "#010101",
+          },
         },
       },
     },
-  },
-  typography: {},
-  palette: {
-    primary: {
-      main: "#FFA100",
+    typography: {
+      fontFamily: ["IRANSens_v2"],
     },
-  },
-});
+    palette: {
+      primary: {
+        main: "#FFA100",
+      },
+    },
+  })
+);
