@@ -27,6 +27,23 @@
 .magin-left5 {
   margin-left: 3rem !important;
 }
+/* padding */
+.padding-left1 {
+  padding-left: 0.5rem !important;
+}
+.padding-left2 {
+  padding-left: 1rem !important;
+}
+.padding-left3 {
+  padding-left: 2rem !important;
+}
+.padding-left4 {
+  padding-left: 2.5rem !important;
+}
+.padding-left5 {
+  padding-left: 3rem !important;
+}
+
 /*END ltr */
 
 /* rlt */
@@ -44,6 +61,22 @@
 }
 .magin-right5 {
   margin-right: 3rem !important;
+}
+/* padding */
+.padding-right1 {
+  padding-right: 0.5rem !important;
+}
+.padding-right2 {
+  padding-right: 1rem !important;
+}
+.padding-right3 {
+  padding-right: 2rem !important;
+}
+.padding-right4 {
+  padding-right: 2.5rem !important;
+}
+.padding-right5 {
+  padding-right: 3rem !important;
 }
 /* END rlt */
 
@@ -145,4 +178,11 @@ svg {
   height: 20px;
   max-width: 20p;
   max-height: 20px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #cbcbcb !important;
+}
+.MuiOutlinedInput-notchedOutline:hover {
+  border-color: #ffa100 !important;
 }

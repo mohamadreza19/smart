@@ -22,10 +22,13 @@ export const cacheRTL = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
+export const cacheLtr = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer, rtlPlugin],
+});
 
 export const RtlTheme = responsiveFontSizes(
   createTheme({
-    direction: "rtl",
     typography: {
       fontFamily: ["IRANSens_v2"],
     },

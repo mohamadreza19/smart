@@ -1,20 +1,27 @@
+import axios from "axios";
 export const Translation = {
   english: {
     setLanguage: {
       title: "Language selection",
-      enter: "enter",
+      // enter: "enter",
     },
     login: {
-      title: "Language selection",
+      title: "enter to website",
     },
   },
   persion: {
     setLanguage: {
       title: "انتخاب زبان",
-      enter: "ورود",
+      // enter: "ورود",
     },
     login: {
-      title: "انتخاب زبان",
+      title: "ورود به سایت",
     },
   },
+};
+
+const backApi = "http://185.110.190.84:1123/api";
+export const get_Interface_Language = async () => {
+  const url = `${backApi}/interface-languages`;
+  return axios.get(url);
 };

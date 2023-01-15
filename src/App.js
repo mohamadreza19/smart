@@ -7,12 +7,14 @@ import { useImmer } from "use-immer";
 import { cacheRTL, LtrTheme, RtlTheme } from "./styles/theme";
 import { useContext, useEffect } from "react";
 
-import { Translation } from "./services/Translation";
+import { get_Interface_Language, Translation } from "./services/Translation";
 import { Route, Routes } from "react-router-dom";
 import { SelectionLanguage } from "./components/selectionLanguage/SelectionLanguage";
 import useLocalStorage from "react-use-localstorage";
 import { selectionClass } from "./services/classApi";
 import { UiContext } from "./Uicontext/UiContext";
+import { Main } from "./components/main/Main";
+import { Login } from "./components/auth/Login";
 
 function App() {
   const [trasnlatedConent, setTrasnlatedConent] = useImmer({
@@ -35,45 +37,64 @@ function App() {
     ms_4: "magin-left4",
     ms_5: "magin-left5",
   });
+  const [isLogin, setIsLogin] = useImmer(false);
 
   useEffect(() => {
-    const handleChangeDirection = () => {
-      if (language === "persion") {
-        document.dir = "rtl";
-        setTrasnlatedConent(Translation.persion);
-        SetDynamicClasses(selectionClass(language));
-      } else {
-        SetDynamicClasses(selectionClass(language));
-        document.dir = "ltl";
-        setTrasnlatedConent(Translation.english);
-      }
+    const set_language = async () => {
+      const data = await get_Interface_Language();
+      return console.log(data);
     };
-    handleChangeDirection();
+    set_language();
+  }, []);
+
+  useEffect(() => {
+    // const handleChangeDirection = () => {
+    //   if (language === "persion") {
+    //     document.dir = "rtl";
+    //     setTrasnlatedConent(Translation.persion);
+    //     SetDynamicClasses(selectionClass(language));
+    //   } else {
+    //     SetDynamicClasses(selectionClass(language));
+    //     document.dir = "ltl";
+    //     setTrasnlatedConent(Translation.english);
+    //   }
+    // };
+    // handleChangeDirection();
   }, [language]);
 
+  const MycacheProider = (props) => {
+    return language === "persion" ? (
+      <CacheProvider value={cacheRTL}>{props.children}</CacheProvider>
+    ) : (
+      <div>{props.children}</div>
+    );
+  };
+
   return (
-    <>
-      <CacheProvider value={cacheRTL}>
-        <ThemeProvider theme={language === "persion" ? RtlTheme : LtrTheme}>
-          <UiContext.Provider
-            value={{
-              dynamicClasses,
-              trasnlatedConent,
-              language,
-              setLanguage,
-              setCachedLanguage,
-            }}
-          >
-            <Routes>
-              <Route
-                path="/"
-                element={!cachedLanguage ? <SelectionLanguage /> : <h1>slm</h1>}
-              />
-            </Routes>
-          </UiContext.Provider>
-        </ThemeProvider>
-      </CacheProvider>
-    </>
+    <MycacheProider>
+      <ThemeProvider theme={language === "persion" ? RtlTheme : LtrTheme}>
+        <UiContext.Provider
+          value={{
+            dynamicClasses,
+            trasnlatedConent,
+            language,
+            setLanguage,
+            setCachedLanguage,
+            isLogin,
+            setIsLogin,
+          }}
+        >
+          <Routes>
+            <Route
+              path="/"
+              element={!cachedLanguage ? <SelectionLanguage /> : <Main />}
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Login />} />
+          </Routes>
+        </UiContext.Provider>
+      </ThemeProvider>
+    </MycacheProider>
   );
 }
 

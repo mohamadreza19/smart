@@ -45,7 +45,7 @@ export function SelectionLanguage() {
         <Button
           variant="contained"
           color="primary"
-          className={`w-75 ${dynamicClasses.me_2}`}
+          className={`w-25 ${dynamicClasses.me_2}`}
         >
           <Typography variant="button">
             {trasnlatedConent.setLanguage.enter}
