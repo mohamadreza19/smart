@@ -2,8 +2,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  /* outline: 3px solid black; */
 }
-
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
 .h_vh100 {
   height: 100vh;
 }
@@ -97,6 +101,9 @@
 .border-radius5 {
   border-radius: 10px;
 }
+.border-radius45 {
+  border-radius: 45px !important;
+}
 
 /*End borderRadius */
 
@@ -122,6 +129,18 @@
 .fill-blue100 {
   fill: #266c7a !important;
 }
+.fill-white100 {
+  fill: #ffffff !important;
+}
+.fill-black100 {
+  fill: #404040 !important;
+}
+
+/* font color */
+
+.text-color-white100 {
+  color: #ffffff;
+}
 /* display */
 
 .d-contents {
@@ -137,7 +156,7 @@ svg {
   cursor: pointer;
 }
 
-.english-flag {
+.flag {
   width: 48px;
   height: 30px;
   background-image: url("../svg/flag/uk.svg");
@@ -185,4 +204,17 @@ svg {
 }
 .MuiOutlinedInput-notchedOutline:hover {
   border-color: #ffa100 !important;
+}
+/* Error FallbackComponent */
+.fallback-component {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  /* min-width: 0.875rem; */
+  /* min-height: 0.875rem; */
 }
