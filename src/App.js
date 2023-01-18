@@ -117,7 +117,16 @@ function App() {
                           <Main />
                         </AuthControler>
                       }
-                    />
+                    >
+                      <Route
+                        path="home"
+                        element={
+                          <AuthControler redirect="/login">
+                            <h1>home</h1>
+                          </AuthControler>
+                        }
+                      />
+                    </Route>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Login />} />
                   </Routes>

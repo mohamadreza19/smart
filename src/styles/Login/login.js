@@ -1,8 +1,9 @@
+import { useTheme } from "@mui/material";
 import { createElement } from "react";
 
 export const loginclass = {
   root: "w-100 h_vh100 bg_primary d-flex align-items-center justify-content-center",
-  LoginMainBox: "w-75 h_300px bg-white border-radius5 d-flex flex-column ",
+  LoginMainBox: "w-75 bg-white border-radius5 d-flex flex-column ",
   LoginTilteBox: "w-100 ",
 };
 

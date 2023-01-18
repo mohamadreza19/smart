@@ -5,6 +5,7 @@ import {
   styled,
   ThemeProvider,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import rtlPlugin from "stylis-plugin-rtl";
 
@@ -48,6 +49,7 @@ export const RtlTheme = responsiveFontSizes(
     },
   })
 );
+
 export const LtrTheme = responsiveFontSizes(
   createTheme({
     components: {
