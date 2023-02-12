@@ -6,6 +6,7 @@ import {
   ThemeProvider,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import rtlPlugin from "stylis-plugin-rtl";
 
@@ -13,13 +14,17 @@ import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../recoil/readStore";
 
 const colors = {
-  primary: "#FFA100",
-  title_v1: "secondary",
-  title_v2: "#838383",
-  text_v1: "#404040",
-  black: "#000000",
+  primary: "#FF7D41",
+  secondary: "#434343",
+  info: "#F5F5F5",
+  gray1: "#ECECEC",
+  gray2: "#CBCBCB",
+  white: "#FFFFFF",
+  black1: "#454545",
+  danger: "#FA452D",
 };
 
 export const cacheRTL = createCache({
@@ -31,14 +36,26 @@ export const cacheLtr = createCache({
   stylisPlugins: [prefixer, rtlPlugin],
 });
 
-export const RtlTheme = responsiveFontSizes(
+export const RtlTheme =
+  //  responsiveFontSizes(
   createTheme({
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            color: "#FFFFFF",
+            borderRadius: "10px",
+            // fontSize: "0px",
+          },
+        },
+      },
+    },
     typography: {
-      fontFamily: ["IRANSens_v2"],
+      fontFamily: ["Vazirmatn"],
     },
     palette: {
       primary: {
-        main: "#FFA100",
+        main: colors.primary,
       },
       secondary: {
         main: "#404040",
@@ -47,10 +64,11 @@ export const RtlTheme = responsiveFontSizes(
         main: "#FFFFFF",
       },
     },
-  })
-);
+  });
+// );
 
-export const LtrTheme = responsiveFontSizes(
+export const LtrTheme =
+  //  responsiveFontSizes(
   createTheme({
     components: {
       MuiButton: {
@@ -62,9 +80,13 @@ export const LtrTheme = responsiveFontSizes(
       },
     },
     typography: {
-      fontFamily: ["IRANSens_v2"],
+      // fontFamily: ["IRANSens_v2"],
     },
     palette: {
+      background: {
+        // default: "black !important",
+      },
+
       primary: {
         main: "#FFA100",
       },
@@ -75,10 +97,11 @@ export const LtrTheme = responsiveFontSizes(
         main: "#FFFFFF",
       },
     },
-  })
-);
+  });
+// );
 export const MycacheProider = (props) => {
-  return props.language === "فارسی" ? (
+  const language = useLanguage();
+  return language === "fa" ? (
     <CacheProvider value={cacheRTL}>{props.children}</CacheProvider>
   ) : (
     <div>{props.children}</div>
